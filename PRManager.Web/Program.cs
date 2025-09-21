@@ -1,3 +1,8 @@
+using GitHubJwt;
+using Octokit.Webhooks;
+using Octokit.Webhooks.AspNetCore;
+using PRManager.Web.GithubClients;
+
 namespace PRManager.Web;
 
 public class Program
@@ -6,25 +11,28 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+        builder.Services.AddSingleton<IGithubClientFactory, GithubClientFactory>();
 
-        builder.Services.AddControllers();
-        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSingleton<WebhookEventProcessor, PrManagerEventProcessor>();
+        
+        builder.Services.AddSingleton<IGitHubJwtFactory, GitHubJwtFactory>(provider =>
+        {
+            var configuration = provider.GetRequiredService<IConfiguration>();
+            var githubConfig = configuration.GetRequiredSection("GithubAppConfig").Get<GithubAppConfig>()!;
+            var opts = new GitHubJwtFactoryOptions
+            {
+                AppIntegrationId = githubConfig.AppId,
+                ExpirationSeconds = githubConfig.AppAuthTokenExpirationSeconds
+            };
+
+            return new(new FilePrivateKeySource(githubConfig.CertPath), opts);
+        });
+
+        var githubSecret = builder.Configuration["GithubSecret"];
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
-
-        app.UseHttpsRedirection();
-
-        app.MapControllers();
+        app.MapGitHubWebhooks("/", secret: githubSecret);
 
         app.Run();
     }

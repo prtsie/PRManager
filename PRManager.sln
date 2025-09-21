@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Web", "PRManager.Web\PRManager.Web.csproj", "{E6622BFF-2BD8-4382-80FF-6348A84FBD95}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Web", "PRManager.Web\PRManager.Web.csproj", "{C195429C-564E-49F5-8F7E-E37E58030377}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +8,9 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E6622BFF-2BD8-4382-80FF-6348A84FBD95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6622BFF-2BD8-4382-80FF-6348A84FBD95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6622BFF-2BD8-4382-80FF-6348A84FBD95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6622BFF-2BD8-4382-80FF-6348A84FBD95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C195429C-564E-49F5-8F7E-E37E58030377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C195429C-564E-49F5-8F7E-E37E58030377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C195429C-564E-49F5-8F7E-E37E58030377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C195429C-564E-49F5-8F7E-E37E58030377}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
