@@ -1,7 +1,4 @@
-using GitHubJwt;
-using Octokit.Webhooks;
-using Octokit.Webhooks.AspNetCore;
-using PRManager.Web.GithubClients;
+using PRManager.Approving.Web;
 
 namespace PRManager.Web;
 
@@ -11,28 +8,12 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddSingleton<IGithubClientFactory, GithubClientFactory>();
-
-        builder.Services.AddSingleton<WebhookEventProcessor, PrManagerEventProcessor>();
-        
-        builder.Services.AddSingleton<IGitHubJwtFactory, GitHubJwtFactory>(provider =>
-        {
-            var configuration = provider.GetRequiredService<IConfiguration>();
-            var githubConfig = configuration.GetRequiredSection("GithubAppConfig").Get<GithubAppConfig>()!;
-            var opts = new GitHubJwtFactoryOptions
-            {
-                AppIntegrationId = githubConfig.AppId,
-                ExpirationSeconds = githubConfig.AppAuthTokenExpirationSeconds
-            };
-
-            return new(new FilePrivateKeySource(githubConfig.CertPath), opts);
-        });
-
-        var githubSecret = builder.Configuration["GithubSecret"];
+        builder.Services.ConfigureApproving(builder.Configuration);
+        var githubSecret = builder.Configuration["GithubSecret"]!;
 
         var app = builder.Build();
 
-        app.MapGitHubWebhooks("/", secret: githubSecret);
+        app.UseApproving(githubSecret);
 
         app.Run();
     }

@@ -16,4 +16,12 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="GithubClients\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PRManager.Approving.Web\PRManager.Approving.Web.csproj" />
+    </ItemGroup>
+
 </Project>

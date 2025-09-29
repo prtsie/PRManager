@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PRManager.Approving.Providers.Contracts\PRManager.Approving.Providers.Contracts.csproj" />
+      <ProjectReference Include="..\PRManager.Approving.Services.Contracts\PRManager.Approving.Services.Contracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="GitHubJwt" Version="0.0.6" />
+      <PackageReference Include="Octokit" Version="14.0.0" />
+    </ItemGroup>
+
+</Project>

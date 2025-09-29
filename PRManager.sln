@@ -2,6 +2,18 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Web", "PRManager.Web\PRManager.Web.csproj", "{C195429C-564E-49F5-8F7E-E37E58030377}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PRManager.Approving", "PRManager.Approving", "{1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.Providers", "PRManager.Approving.Providers\PRManager.Approving.Providers.csproj", "{992A35E7-F5EB-440E-A0FB-413584B11832}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.Providers.Contracts", "PRManager.Approving.Providers.Contracts\PRManager.Approving.Providers.Contracts.csproj", "{2637EC49-B512-4ADF-AFF9-8B3FC9AB0F69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.Services", "PRManager.Approving.Services\PRManager.Approving.Services.csproj", "{F8E0BB7E-23FC-4659-9E36-91AB77C9C883}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.Services.Contracts", "PRManager.Approving.Services.Contracts\PRManager.Approving.Services.Contracts.csproj", "{6CF97469-9A76-4247-828E-2876FB70CAF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.Web", "PRManager.Approving.Web\PRManager.Approving.Web.csproj", "{9CF12A63-86E0-4386-9828-4A3823254639}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +24,32 @@ Global
 		{C195429C-564E-49F5-8F7E-E37E58030377}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C195429C-564E-49F5-8F7E-E37E58030377}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C195429C-564E-49F5-8F7E-E37E58030377}.Release|Any CPU.Build.0 = Release|Any CPU
+		{992A35E7-F5EB-440E-A0FB-413584B11832}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{992A35E7-F5EB-440E-A0FB-413584B11832}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{992A35E7-F5EB-440E-A0FB-413584B11832}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{992A35E7-F5EB-440E-A0FB-413584B11832}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2637EC49-B512-4ADF-AFF9-8B3FC9AB0F69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2637EC49-B512-4ADF-AFF9-8B3FC9AB0F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2637EC49-B512-4ADF-AFF9-8B3FC9AB0F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2637EC49-B512-4ADF-AFF9-8B3FC9AB0F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8E0BB7E-23FC-4659-9E36-91AB77C9C883}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8E0BB7E-23FC-4659-9E36-91AB77C9C883}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8E0BB7E-23FC-4659-9E36-91AB77C9C883}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8E0BB7E-23FC-4659-9E36-91AB77C9C883}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF97469-9A76-4247-828E-2876FB70CAF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF97469-9A76-4247-828E-2876FB70CAF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF97469-9A76-4247-828E-2876FB70CAF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF97469-9A76-4247-828E-2876FB70CAF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF12A63-86E0-4386-9828-4A3823254639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF12A63-86E0-4386-9828-4A3823254639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF12A63-86E0-4386-9828-4A3823254639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF12A63-86E0-4386-9828-4A3823254639}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{992A35E7-F5EB-440E-A0FB-413584B11832} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
+		{2637EC49-B512-4ADF-AFF9-8B3FC9AB0F69} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
+		{F8E0BB7E-23FC-4659-9E36-91AB77C9C883} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
+		{6CF97469-9A76-4247-828E-2876FB70CAF9} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
+		{9CF12A63-86E0-4386-9828-4A3823254639} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
 	EndGlobalSection
 EndGlobal

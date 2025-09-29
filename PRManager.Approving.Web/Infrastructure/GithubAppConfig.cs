@@ -1,4 +1,4 @@
-namespace PRManager.Web;
+namespace PRManager.Approving.Web.Infrastructure;
 
 /// <summary>
 /// Настройки интеграции с Github App
