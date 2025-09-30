@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PRManager.Approving.GithubClient.Contracts\PRManager.Approving.GithubClient.Contracts.csproj" />
       <ProjectReference Include="..\PRManager.Approving.Providers.Contracts\PRManager.Approving.Providers.Contracts.csproj" />
     </ItemGroup>
 

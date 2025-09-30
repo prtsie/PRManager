@@ -29,17 +29,21 @@ public partial class PrManagerEventProcessor(IGithubClientFactory clientFactory)
             return;
         }
 
+        await clientFactory.InitClientForInstallation(issueComment.Installation!.Id);
+
         var repoId = issueComment.Repository.Id;
-        var client = await clientFactory.GetClientForInstallation(issueComment.Installation!.Id);
+        var client = clientFactory.Client;
         var errorsBuilder = new StringBuilder();
-        var response = await client.Issue.Comment.Create(repoId, issueComment.Issue.Number, "Ща проверим...");
+        var response =
+            await client.Issue.Comment.Create(repoId, issueComment.Issue.Number, "Ща проверим...");
 
         var readmeFile = await client.Repository.Content.GetReadme(repoId);
         if (ValidateReadme(readmeFile.Content) is {} validationErrors)
         {
             var pullRequest = await client.PullRequest.Get(repoId, (int)issueComment.Issue.Number);
             var branch = pullRequest.Head.Ref;
-            var readmeFromPullRequestBranch = await client.Repository.Content.GetAllContentsByRef(repoId, "README.md", branch);
+            var readmeFromPullRequestBranch =
+                await client.Repository.Content.GetAllContentsByRef(repoId, "README.md", branch);
             if (readmeFromPullRequestBranch?.FirstOrDefault() is not {} prReadme)
             {
                 errorsBuilder.AppendLine(validationErrors);

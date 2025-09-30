@@ -10,21 +10,18 @@ public class GithubClientFactory(IGitHubJwtFactory tokenFactory) : IGithubClient
     /// Кэширование клиента в пределах запроса
     /// </summary>
     private IGitHubClient? created;
-    
-    async Task<IGitHubClient> IGithubClientFactory.GetClientForInstallation(long installationId)
+
+    public IGitHubClient Client => created 
+                                   ?? throw new InvalidOperationException("Использование неинициализированного клиента");
+
+    async Task IGithubClientFactory.InitClientForInstallation(long installationId)
     {
-        if (created is not null)
-        {
-            return created;
-        }
-        
         var client = Create(); // Сначала генерируем клиента Github App
         
         // Потом с помощью него получаем токен для клиента нужной installation
         var token = await client.GitHubApps.CreateInstallationToken(installationId);
 
         created = Create(token.Token);
-        return created;
     }
 
     /// <summary>
