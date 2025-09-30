@@ -8,5 +8,5 @@ public class ReadmeModel
     /// <summary>
     /// Содержимое файла readme
     /// </summary>
-    public string Content { get; set; }
+    public required string Content { get; set; }
 }
