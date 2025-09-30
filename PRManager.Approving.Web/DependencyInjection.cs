@@ -4,8 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Octokit.Webhooks;
 using Octokit.Webhooks.AspNetCore;
-using PRManager.Approving.Services;
-using PRManager.Approving.Services.Contracts;
+using PRManager.Approving.GithubClient;
+using PRManager.Approving.GithubClient.Contracts;
 using PRManager.Approving.Web.Infrastructure;
 
 namespace PRManager.Approving.Web;

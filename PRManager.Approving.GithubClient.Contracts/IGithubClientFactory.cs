@@ -1,6 +1,6 @@
 using Octokit;
 
-namespace PRManager.Approving.Services.Contracts;
+namespace PRManager.Approving.GithubClient.Contracts;
 
 public interface IGithubClientFactory
 {

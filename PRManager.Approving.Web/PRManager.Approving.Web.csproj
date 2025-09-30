@@ -12,6 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\PRManager.Approving.GithubClient.Contracts\PRManager.Approving.GithubClient.Contracts.csproj" />
+      <ProjectReference Include="..\PRManager.Approving.GithubClient\PRManager.Approving.GithubClient.csproj" />
       <ProjectReference Include="..\PRManager.Approving.Providers\PRManager.Approving.Providers.csproj" />
       <ProjectReference Include="..\PRManager.Approving.Services\PRManager.Approving.Services.csproj" />
     </ItemGroup>

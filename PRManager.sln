@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Web", "PRManager.Web\PRManager.Web.csproj", "{C195429C-564E-49F5-8F7E-E37E58030377}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PRManager.Approving", "PRManager.Approving", "{1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Approving", "Approving", "{1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.Providers", "PRManager.Approving.Providers\PRManager.Approving.Providers.csproj", "{992A35E7-F5EB-440E-A0FB-413584B11832}"
 EndProject
@@ -13,6 +13,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.Services.Contracts", "PRManager.Approving.Services.Contracts\PRManager.Approving.Services.Contracts.csproj", "{6CF97469-9A76-4247-828E-2876FB70CAF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.Web", "PRManager.Approving.Web\PRManager.Approving.Web.csproj", "{9CF12A63-86E0-4386-9828-4A3823254639}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.GithubClient", "PRManager.Approving.GithubClient\PRManager.Approving.GithubClient.csproj", "{53F096D5-E774-43C6-8AFC-10E0CE0BE06D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRManager.Approving.GithubClient.Contracts", "PRManager.Approving.GithubClient.Contracts\PRManager.Approving.GithubClient.Contracts.csproj", "{2010DE99-2FD0-4990-A76F-D519B282EB34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +48,14 @@ Global
 		{9CF12A63-86E0-4386-9828-4A3823254639}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CF12A63-86E0-4386-9828-4A3823254639}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CF12A63-86E0-4386-9828-4A3823254639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53F096D5-E774-43C6-8AFC-10E0CE0BE06D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53F096D5-E774-43C6-8AFC-10E0CE0BE06D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53F096D5-E774-43C6-8AFC-10E0CE0BE06D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53F096D5-E774-43C6-8AFC-10E0CE0BE06D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2010DE99-2FD0-4990-A76F-D519B282EB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2010DE99-2FD0-4990-A76F-D519B282EB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2010DE99-2FD0-4990-A76F-D519B282EB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2010DE99-2FD0-4990-A76F-D519B282EB34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{992A35E7-F5EB-440E-A0FB-413584B11832} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
@@ -51,5 +63,7 @@ Global
 		{F8E0BB7E-23FC-4659-9E36-91AB77C9C883} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
 		{6CF97469-9A76-4247-828E-2876FB70CAF9} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
 		{9CF12A63-86E0-4386-9828-4A3823254639} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
+		{53F096D5-E774-43C6-8AFC-10E0CE0BE06D} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
+		{2010DE99-2FD0-4990-A76F-D519B282EB34} = {1AC5CE6E-C366-4F3E-B05F-88E1DEDB6757}
 	EndGlobalSection
 EndGlobal

@@ -1,8 +1,8 @@
 using GitHubJwt;
 using Octokit;
-using PRManager.Approving.Services.Contracts;
+using PRManager.Approving.GithubClient.Contracts;
 
-namespace PRManager.Approving.Services;
+namespace PRManager.Approving.GithubClient;
 
 public class GithubClientFactory(IGitHubJwtFactory tokenFactory) : IGithubClientFactory
 {
