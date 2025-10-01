@@ -21,6 +21,7 @@ public class BranchContentProvider(IGithubClientFactory clientFactory) : IBranch
         localDirectory = Path.Combine(AppContext.BaseDirectory, ReposDirectory, Guid.NewGuid().ToString());
         Directory.CreateDirectory(localDirectory);
         var client = clientFactory.Client;
+        string? executableProjectDirectory = null;
 
         List<string> remoteDirs = ["/"];
 
@@ -47,6 +48,11 @@ public class BranchContentProvider(IGithubClientFactory clientFactory) : IBranch
                         content.Path,
                         request.BranchName);
 
+                    if (content.Name is "Program.cs")
+                    {
+                        executableProjectDirectory = Path.GetDirectoryName(content.Path);
+                    }
+
                     var localPath = Path.Combine(localDirectory, content.Path);
 
                     if (Path.GetDirectoryName(localPath) is {} directoryName)
@@ -60,7 +66,11 @@ public class BranchContentProvider(IGithubClientFactory clientFactory) : IBranch
             remoteDirs.RemoveAt(0);
         }
         
-        return new() { RootPath = localDirectory };
+        return new()
+        {
+            RootPath = localDirectory,
+            ExecutableProjectDirectory = executableProjectDirectory
+        };
     }
 
     void IDisposable.Dispose()

@@ -1,5 +1,6 @@
 using PRManager.Approving.Services.Contracts;
 using PRManager.Approving.Services.Contracts.Models;
+using PRManager.Approving.Services.Contracts.Models.Errors;
 
 namespace PRManager.Approving.Services;
 

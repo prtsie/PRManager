@@ -44,7 +44,7 @@ public class PrManagerEventProcessor(IGithubClientFactory clientFactory, IApprov
         
         var result = errors.Count == 0
             ? "OK!"
-            : string.Join('\n', errors);
+            : ErrorProcessor.ProcessMany(errors);
 
         await client.Issue.Comment.Update(repoId, response.Id, result);
     }

@@ -2,14 +2,13 @@ using System.Text.RegularExpressions;
 using PRManager.Approving.Providers.Contracts;
 using PRManager.Approving.Services.Contracts;
 using PRManager.Approving.Services.Contracts.Models;
+using PRManager.Approving.Services.Contracts.Models.Errors;
 
 namespace PRManager.Approving.Services.Validators;
 
 /// <inheritdoc cref="IPullRequestValidator" />
 public partial class ReadmeValidator(IReadmeProvider readmeProvider) : IPullRequestValidator, IApprovingServicesAnchor
 {
-    private const string TaskNumberGroup = "taskNumber";
-    
     [GeneratedRegex(@"^# \[\d+\] .*")]
     private static partial Regex ReadmeHeaderRegex();
     
@@ -29,7 +28,7 @@ public partial class ReadmeValidator(IReadmeProvider readmeProvider) : IPullRequ
 
         if (ValidateReadme(fromBranch.Content) is {} error)
         {
-            return new() { Message = error };
+            return new(error);
         }
 
         return null;
@@ -41,13 +40,13 @@ public partial class ReadmeValidator(IReadmeProvider readmeProvider) : IPullRequ
         
         if (readmeLines.Length < 2)
         {
-            return "- README должен содержать как минимум строку с названием и строку с ФИО";
+            return "README должен содержать как минимум строку с названием и строку с ФИО";
         }
 
         var match = ReadmeHeaderRegex().Match(readmeLines[0].TrimStart());
         if (!match.Success)
         {
-            return "- Заголовок неверного формата: должен начинаться с решётки и содержать номер задания в квадратных скобках";
+            return "Заголовок неверного формата: должен начинаться с решётки и содержать номер задания в квадратных скобках";
         }
 
         return null;
