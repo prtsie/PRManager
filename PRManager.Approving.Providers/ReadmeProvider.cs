@@ -1,27 +1,26 @@
-using Octokit;
 using PRManager.Approving.GithubClient.Contracts;
 using PRManager.Approving.Providers.Contracts;
 using PRManager.Approving.Providers.Contracts.Models;
 
 namespace PRManager.Approving.Providers;
 
-/// <inheritdoc />
-public class ReadmeProvider(IGithubClientFactory clientFactory) : IReadmeProvider
+/// <inheritdoc cref="IReadmeProvider" />
+public class ReadmeProvider(IGithubClientFactory clientFactory) : IReadmeProvider, IApprovingProvidersAnchor
 {
-    private readonly IGitHubClient client = clientFactory.Client;
     
     async Task<ReadmeModel> IReadmeProvider.GetReadmeFromMain(long repoId, CancellationToken cancellationToken)
     {
-        var readme = await client.Repository.Content.GetReadme(repoId);
+        var readme = await clientFactory.Client.Repository.Content.GetReadme(repoId);
         return new() { Content = readme.Content };
     }
 
-    async Task<ReadmeModel> IReadmeProvider.GetReadmeFromPullRequest(long repoId, int issueNumber, CancellationToken cancellationToken)
+    async Task<ReadmeModel> IReadmeProvider.GetReadmeFromPullRequest(
+        long repoId,
+        int issueNumber,
+        string branchName,
+        CancellationToken cancellationToken)
     {
-        var pullRequest = await client.Repository.PullRequest.Get(repoId, issueNumber);
-        var branchName = pullRequest.Head.Ref;
-        
-        var readmeAllContents = await client.Repository.Content.GetAllContentsByRef(
+        var readmeAllContents = await clientFactory.Client.Repository.Content.GetAllContentsByRef(
             repoId,
             "README.md",
             branchName);

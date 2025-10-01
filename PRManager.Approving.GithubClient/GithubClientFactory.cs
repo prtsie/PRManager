@@ -4,15 +4,16 @@ using PRManager.Approving.GithubClient.Contracts;
 
 namespace PRManager.Approving.GithubClient;
 
-public class GithubClientFactory(IGitHubJwtFactory tokenFactory) : IGithubClientFactory
+/// <inheritdoc cref="IGithubClientFactory" />
+public class GithubClientFactory(IGitHubJwtFactory tokenFactory) : IGithubClientFactory, IGithubServicesAnchor
 {
     /// <summary>
     /// Кэширование клиента в пределах запроса
     /// </summary>
     private IGitHubClient? created;
 
-    public IGitHubClient Client => created 
-                                   ?? throw new InvalidOperationException("Использование неинициализированного клиента");
+    IGitHubClient IGithubClientFactory.Client => created 
+                                                 ?? throw new InvalidOperationException("Использование неинициализированного клиента");
 
     async Task IGithubClientFactory.InitClientForInstallation(long installationId)
     {

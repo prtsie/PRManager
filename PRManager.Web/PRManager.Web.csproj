@@ -6,20 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
       <UserSecretsId>9d5b805a-5802-4eee-bfc5-ff1db3e7b213</UserSecretsId>
   </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="GitHubJwt" Version="0.0.6" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.20" />
-        <PackageReference Include="Octokit" Version="14.0.0" />
-        <PackageReference Include="Octokit.Webhooks" Version="3.2.1" />
-        <PackageReference Include="Octokit.Webhooks.AspNetCore" Version="3.2.1" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="GithubClients\" />
-    </ItemGroup>
-
+    
     <ItemGroup>
       <ProjectReference Include="..\PRManager.Approving.Web\PRManager.Approving.Web.csproj" />
     </ItemGroup>

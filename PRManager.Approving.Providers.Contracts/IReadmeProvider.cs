@@ -15,5 +15,5 @@ public interface IReadmeProvider
     /// <summary>
     /// Получить readme-файл из ветки по названию ветки
     /// </summary>
-    Task<ReadmeModel> GetReadmeFromPullRequest(long repoId, int issueNumber, CancellationToken cancellationToken);
+    Task<ReadmeModel> GetReadmeFromPullRequest(long repoId, int issueNumber, string branchName, CancellationToken cancellationToken);
 }

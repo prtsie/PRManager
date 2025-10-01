@@ -5,8 +5,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Octokit.Webhooks;
 using Octokit.Webhooks.AspNetCore;
 using PRManager.Approving.GithubClient;
-using PRManager.Approving.GithubClient.Contracts;
+using PRManager.Approving.Providers;
+using PRManager.Approving.Services;
+using PRManager.Approving.Services.Contracts;
+using PRManager.Approving.Services.Validators;
 using PRManager.Approving.Web.Infrastructure;
+using PRManager.Common.Mvc.Extensions;
 
 namespace PRManager.Approving.Web;
 
@@ -14,10 +18,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection ConfigureApproving(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddSingleton<IGithubClientFactory, GithubClientFactory>();
-
-        services.AddSingleton<WebhookEventProcessor, PrManagerEventProcessor>();
-
+        services.AddScoped<WebhookEventProcessor, PrManagerEventProcessor>();
+        
         var githubConfig = configuration.GetRequiredSection("GithubAppConfig").Get<GithubAppConfig>()!;
         var opts = new GitHubJwtFactoryOptions
         {
@@ -26,6 +28,11 @@ public static class DependencyInjection
         };
         services.AddSingleton<IGitHubJwtFactory, GitHubJwtFactory>( _ 
             => new(new FilePrivateKeySource(githubConfig.CertPath), opts));
+        
+        services.RegisterAssemblyInterfacesAssignableTo<IGithubServicesAnchor>(ServiceLifetime.Scoped);
+        services.RegisterAssemblyInterfacesAssignableTo<IApprovingProvidersAnchor>(ServiceLifetime.Scoped);
+        services.RegisterAssemblyInterfacesAssignableTo<IApprovingServicesAnchor>(ServiceLifetime.Scoped);
+        services.RegisterImplementationsOf<IPullRequestValidator>(typeof(ReadmeValidator).Assembly, ServiceLifetime.Scoped);
 
         return services;
     }
