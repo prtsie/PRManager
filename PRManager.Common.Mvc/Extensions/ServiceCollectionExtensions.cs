@@ -1,6 +1,9 @@
 using System.Reflection;
+using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using PRManager.Common.Core.Attributes;
+using PRManager.Common.Core.Models;
 
 namespace PRManager.Common.Mvc.Extensions;
 
@@ -41,7 +44,7 @@ public static class ServiceCollectionExtensions
         var serviceType = typeof(TService);
         
         services.RemoveAll<TService>();
-        
+
         var types = implementationsAssembly.GetTypes()
             .Where(t => t != serviceType &&
                         serviceType.IsAssignableFrom(t) &&
@@ -50,8 +53,17 @@ public static class ServiceCollectionExtensions
                             IsAbstract: false,
                             IsPublic: true,
                             IsInterface: false
-                        });
+                        })
+            .OrderByDescending(t =>
+            {
+                var attribute = t.GetCustomAttribute<RegisterPriorityAttribute>();
+                var priority = attribute?.Priority ?? RegisterPriorities.Default;
+                return (int)priority;
+            });
         
         services.TryAddEnumerable(types.Select(x => new ServiceDescriptor(serviceType, x, lifetime)));
     }
+
+    public static void RegisterAutoMapperProfile<T>(this IServiceCollection services) where T : Profile 
+        => services.AddSingleton<Profile, T>();
 }

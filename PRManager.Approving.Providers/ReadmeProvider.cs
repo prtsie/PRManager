@@ -8,24 +8,34 @@ namespace PRManager.Approving.Providers;
 public class ReadmeProvider(IGithubClientFactory clientFactory) : IReadmeProvider, IApprovingProvidersAnchor
 {
     
-    async Task<ReadmeModel> IReadmeProvider.GetReadmeFromMain(long repoId, CancellationToken cancellationToken)
+    async Task<ReadmeModel?> IReadmeProvider.GetReadmeFromMain(long repoId, CancellationToken cancellationToken)
     {
-        var readme = await clientFactory.Client.Repository.Content.GetReadme(repoId);
-        return new() { Content = readme.Content };
+        try
+        {
+            var readme = await clientFactory.Client.Repository.Content.GetReadme(repoId);
+            return new() { Content = readme.Content };
+        }
+        catch (Octokit.NotFoundException)
+        {
+            return null;
+        }
     }
 
-    async Task<ReadmeModel> IReadmeProvider.GetReadmeFromPullRequest(
-        long repoId,
-        int issueNumber,
-        string branchName,
-        CancellationToken cancellationToken)
+    async Task<ReadmeModel?> IReadmeProvider.GetReadmeFromPullRequest(ReadmeRequest request, CancellationToken cancellationToken)
     {
-        var readmeAllContents = await clientFactory.Client.Repository.Content.GetAllContentsByRef(
-            repoId,
-            "README.md",
-            branchName);
-        var readmeContent = readmeAllContents?.FirstOrDefault()?.Content ?? string.Empty;
+        try
+        {
+            var readmeAllContents = await clientFactory.Client.Repository.Content.GetAllContentsByRef(
+                request.RepositoryId,
+                "README.md",
+                request.BranchName);
+            var readmeContent = readmeAllContents?.FirstOrDefault()?.Content ?? string.Empty;
 
-        return new() { Content = readmeContent };
+            return new() { Content = readmeContent };
+        }
+        catch (Octokit.NotFoundException)
+        {
+            return null;
+        }
     }
 }

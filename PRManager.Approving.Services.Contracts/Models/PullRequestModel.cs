@@ -2,13 +2,15 @@ namespace PRManager.Approving.Services.Contracts.Models;
 
 public class PullRequestModel
 {
-    public long RepositoryId { get; init; }
+    public long RepositoryId { get; set; }
 
-    public required string RepositoryOwner { get; set; }
+    public string RepositoryOwner { get; set; } = string.Empty;
 
-    public required string RepositoryName { get; set; }
+    public string RepositoryName { get; set; } = string.Empty;
 
-    public int IssueNumber { get; init; }
+    public int IssueNumber { get; set; }
 
-    public required string BranchName { get; init; }
+    public string BranchName { get; set; } = string.Empty;
+
+    public bool HasConflicts { get; set; }
 }

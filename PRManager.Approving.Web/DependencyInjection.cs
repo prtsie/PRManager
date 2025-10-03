@@ -7,8 +7,10 @@ using Octokit.Webhooks.AspNetCore;
 using PRManager.Approving.GithubClient;
 using PRManager.Approving.Providers;
 using PRManager.Approving.Services;
+using PRManager.Approving.Services.Automapper;
 using PRManager.Approving.Services.Contracts;
 using PRManager.Approving.Services.Validators;
+using PRManager.Approving.Web.Automapper;
 using PRManager.Approving.Web.Infrastructure;
 using PRManager.Common.Mvc.Extensions;
 
@@ -33,6 +35,9 @@ public static class DependencyInjection
         services.RegisterAssemblyInterfacesAssignableTo<IApprovingProvidersAnchor>(ServiceLifetime.Scoped);
         services.RegisterAssemblyInterfacesAssignableTo<IApprovingServicesAnchor>(ServiceLifetime.Scoped);
         services.RegisterImplementationsOf<IPullRequestValidator>(typeof(ReadmeValidator).Assembly, ServiceLifetime.Scoped);
+        
+        services.RegisterAutoMapperProfile<ApprovingWebProile>();
+        services.RegisterAutoMapperProfile<ApprovingServicesProfile>();
 
         return services;
     }

@@ -1,6 +1,6 @@
 namespace PRManager.Approving.Providers.Contracts.Models;
 
-public class BranchContentRequestModel
+public class BranchContentRequest
 {
     public required string RepositoryOwner { get; init; }
 

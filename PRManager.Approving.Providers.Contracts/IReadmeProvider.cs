@@ -10,10 +10,10 @@ public interface IReadmeProvider
     /// <summary>
     /// Получить readme-файл из главной ветки
     /// </summary>
-    Task<ReadmeModel> GetReadmeFromMain(long repoId, CancellationToken cancellationToken);
+    Task<ReadmeModel?> GetReadmeFromMain(long repoId, CancellationToken cancellationToken);
     
     /// <summary>
     /// Получить readme-файл из ветки по названию ветки
     /// </summary>
-    Task<ReadmeModel> GetReadmeFromPullRequest(long repoId, int issueNumber, string branchName, CancellationToken cancellationToken);
+    Task<ReadmeModel?> GetReadmeFromPullRequest(ReadmeRequest request, CancellationToken cancellationToken);
 }

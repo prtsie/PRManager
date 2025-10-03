@@ -9,16 +9,16 @@ namespace PRManager.Approving.Providers;
 public class BranchContentProvider(IGithubClientFactory clientFactory) : IBranchContentProvider, IDisposable, IApprovingProvidersAnchor
 {
     private const string ReposDirectory = "clonedRepos";
-    private string? localDirectory;
+    private BranchContentModel? existing;
     
-    async Task<BranchContentModel> IBranchContentProvider.GetBranchContents(BranchContentRequestModel request,
+    async Task<BranchContentModel> IBranchContentProvider.GetBranchContents(BranchContentRequest request,
         CancellationToken cancellationToken)
     {
-        if (localDirectory is not null)
+        if (existing is not null)
         {
-            return new() { RootPath = localDirectory };
+            return existing;
         }
-        localDirectory = Path.Combine(AppContext.BaseDirectory, ReposDirectory, Guid.NewGuid().ToString());
+        var localDirectory = Path.Combine(AppContext.BaseDirectory, ReposDirectory, Guid.NewGuid().ToString());
         Directory.CreateDirectory(localDirectory);
         var client = clientFactory.Client;
         string? executableProjectDirectory = null;
@@ -69,15 +69,17 @@ public class BranchContentProvider(IGithubClientFactory clientFactory) : IBranch
         return new()
         {
             RootPath = localDirectory,
-            ExecutableProjectDirectory = executableProjectDirectory
+            ExecutableProjectDirectory = executableProjectDirectory is null
+                ? null
+                : Path.Combine(localDirectory, executableProjectDirectory)
         };
     }
 
     void IDisposable.Dispose()
     {
-        if (localDirectory != null && Directory.Exists(localDirectory))
+        if (existing != null && Directory.Exists(existing.RootPath))
         {
-            Directory.Delete(localDirectory, true);
+            Directory.Delete(existing.RootPath, true);
         }
     }
 }

@@ -9,6 +9,11 @@
     <ItemGroup>
       <ProjectReference Include="..\PRManager.Approving.Providers.Contracts\PRManager.Approving.Providers.Contracts.csproj" />
       <ProjectReference Include="..\PRManager.Approving.Services.Contracts\PRManager.Approving.Services.Contracts.csproj" />
+      <ProjectReference Include="..\PRManager.Common.Core\PRManager.Common.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
     </ItemGroup>
 
 </Project>

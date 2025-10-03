@@ -9,6 +9,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         builder.Services.ConfigureApproving(builder.Configuration);
+        builder.Services.RegisterAutoMapper();
         var githubSecret = builder.Configuration["GithubSecret"]!;
 
         var app = builder.Build();

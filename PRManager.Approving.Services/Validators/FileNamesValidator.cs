@@ -1,3 +1,4 @@
+using AutoMapper;
 using PRManager.Approving.Providers.Contracts;
 using PRManager.Approving.Providers.Contracts.Models;
 using PRManager.Approving.Services.Contracts;
@@ -7,16 +8,13 @@ using PRManager.Approving.Services.Contracts.Models.Errors;
 namespace PRManager.Approving.Services.Validators;
 
 /// <inheritdoc cref="IPullRequestValidator" />
-public class FileNamesValidator(IBranchContentProvider branchContentProvider) : IPullRequestValidator, IApprovingServicesAnchor
+public class FileNamesValidator(
+    IBranchContentProvider branchContentProvider,
+    IMapper mapper) : IPullRequestValidator
 {
     async Task<ApprovingError?> IPullRequestValidator.Validate(PullRequestModel pullRequest, CancellationToken cancellationToken)
     {
-        var request = new BranchContentRequestModel
-        {
-            BranchName = pullRequest.BranchName,
-            RepositoryOwner = pullRequest.RepositoryOwner,
-            RepositoryName = pullRequest.RepositoryName
-        };
+        var request = mapper.Map<BranchContentRequest>(pullRequest);
         var contents = await branchContentProvider.GetBranchContents(request, cancellationToken);
         var files = Directory.GetFiles(contents.RootPath, "*.cs", SearchOption.AllDirectories)
             .Select(x => x.Replace(contents.RootPath, "")).ToArray();

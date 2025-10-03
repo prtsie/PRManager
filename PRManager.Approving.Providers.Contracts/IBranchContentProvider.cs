@@ -4,5 +4,5 @@ namespace PRManager.Approving.Providers.Contracts;
 
 public interface IBranchContentProvider
 {
-    Task<BranchContentModel> GetBranchContents( BranchContentRequestModel request, CancellationToken cancellationToken);
+    Task<BranchContentModel> GetBranchContents( BranchContentRequest request, CancellationToken cancellationToken);
 }
