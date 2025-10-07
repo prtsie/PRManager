@@ -37,6 +37,7 @@ public class PrManagerEventProcessor(
         
         var pullRequest = await clientFactory.Client.Repository.PullRequest.Get(model.RepositoryId, model.IssueNumber);
         model.BranchName = pullRequest.Head.Ref;
+        model.Link = pullRequest.HtmlUrl;
         model.HasConflicts = !pullRequest.Mergeable!.Value;
         
         var errors = await approvingService.Approve(model, cancellationToken);

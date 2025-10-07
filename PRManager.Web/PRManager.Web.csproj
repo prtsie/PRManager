@@ -9,6 +9,11 @@
     
     <ItemGroup>
       <ProjectReference Include="..\PRManager.Approving.Web\PRManager.Approving.Web.csproj" />
+      <ProjectReference Include="..\PRManager.Notifying.Web\PRManager.Notifying.Web.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Serilog.AspNetCore" Version="8.0.3" />
     </ItemGroup>
 
 </Project>

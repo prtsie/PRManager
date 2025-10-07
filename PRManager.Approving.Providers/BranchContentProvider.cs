@@ -66,13 +66,15 @@ public class BranchContentProvider(IGithubClientFactory clientFactory) : IBranch
             remoteDirs.RemoveAt(0);
         }
         
-        return new()
+        existing = new()
         {
             RootPath = localDirectory,
             ExecutableProjectDirectory = executableProjectDirectory is null
                 ? null
                 : Path.Combine(localDirectory, executableProjectDirectory)
         };
+
+        return existing;
     }
 
     void IDisposable.Dispose()

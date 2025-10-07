@@ -12,5 +12,7 @@ public class PullRequestModel
 
     public string BranchName { get; set; } = string.Empty;
 
+    public string Link { get; set; } = string.Empty;
+
     public bool HasConflicts { get; set; }
 }
